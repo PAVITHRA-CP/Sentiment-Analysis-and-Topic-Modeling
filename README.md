@@ -13,13 +13,19 @@ The solution is split into 4 task :
 The dataset contains characters other than unicode. The data is cleaned by reading the
 characters as unicode and ignoring the non-unicode characters.
 
+      text1 = unicode(text, errors='ignore') 
+
 # Sort the dataset quarterly
 The dataset is sorted on the basis on date field. For each sorted date, the quarter to which the
 date belongs is identified and this value is added to as a new column in the dataset.
 
+      list.append(pd.Timestamp(dt.date(year,month,date)).quarter)
+
 # Polarity Analysis
 On each quarter wise sorted data, the polarity of pros and cons for each quarter is identified.
 From this output the change in intensity of the comments can be calculated.
+
+      scores = sid.polarity_scores(sentence)
 
 # Topic Modeling
 The topic modeling is done on the fields title, pros and cons. Each field were taken
